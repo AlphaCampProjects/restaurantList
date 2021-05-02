@@ -38,19 +38,21 @@ app.get("/", (req, res) => {
     .then((restaurants) => res.render("index", { restaurants }))
     .catch((error) => console.log(error));
 });
-// app.get("/search", (req, res) => {
-//   let noResult = false;
-//   const keyword = req.query.keyword;
-//   const restaurants = restaurantsList.results.filter(
-//     (restaurant) =>
-//       restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
-//       restaurant.category.includes(keyword)
-//   );
-//   if (restaurants.length === 0) {
-//     noResult = true;
-//   }
-//   res.render("index", { restaurants, keyword, noResult });
-// });
+
+app.get("/search", (req, res) => {
+  let noResult = false;
+  const keyword = req.query.keyword;
+  return Restaurant.find({
+    $or: [
+      { name: { $regex: `${keyword}`, $options: "$i" } },
+      { category: { $regex: `${keyword}`, $options: "$i" } },
+    ],
+  })
+    .lean()
+    .then((restaurants) =>
+      res.render("index", { restaurants, keyword, noResult })
+    );
+});
 
 // add new restaurants
 app.get("/restaurants/new", (req, res) => {
@@ -59,27 +61,9 @@ app.get("/restaurants/new", (req, res) => {
 
 //add new restaurant data submit page
 app.post("/restaurants", (req, res) => {
-  const name = req.body.name;
-  const name_en = req.body.name_en;
-  const category = req.body.category;
-  const image = req.body.image;
-  const location = req.body.location;
-  const phone = req.body.phone;
-  const google_map = req.body.map;
-  const rating = req.body.rating;
-  const description = req.body.description;
-
-  return Restaurant.create({
-    name,
-    name_en,
-    category,
-    image,
-    location,
-    phone,
-    google_map,
-    rating,
-    description,
-  })
+  console.log(req.body);
+  const restaurant = req.body;
+  return Restaurant.create(restaurant)
     .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });
