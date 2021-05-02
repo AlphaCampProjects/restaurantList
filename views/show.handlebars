@@ -36,5 +36,9 @@
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{ restaurant.image }}" alt="{{ restaurant.name }}" style="max-width: 600px;">
     </div>
+    <div class="button-area mb-5 d-flex justify-content-center">
+      <a href="/restaurants/{{restaurant._id}}/edit" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Edit</a>
+      <a href="/restaurants/{{restaurant._id}}" class="btn btn-secondary btn-sm mx-1" role="button" aria-pressed="true">Delete</a>
+    </div>
   </div>
 </div>
