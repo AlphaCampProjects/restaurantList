@@ -48,8 +48,10 @@
             </div>
             <div class="card-footer d-flex justify-content-end">
               <a href="/restaurants/{{this._id}}/edit" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Edit</a>
-              <a href="/restaurants/{{this._id}}" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Detail</a>
-              <a href="/restaurants/{{this._id}}" class="btn btn-secondary btn-sm mx-1" role="button" aria-pressed="true">Delete</a>
+              <a href="/restaurants/{{this._id}}" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Detail</a>     
+              <form action="/restaurants/{{this._id}}/delete" method="POST">
+                <button type="submit" class=" btn btn-secondary btn-sm mx-1">delete</button>
+              </form>
             </div>
           </div>
         </a>
