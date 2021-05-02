@@ -5,12 +5,15 @@ const port = 3000;
 const exphbs = require("express-handlebars");
 // mongoose
 const mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/todo-list", {
+mongoose.connect("mongodb://localhost/restaurant", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-const restaurantsList = require("./restaurant.json");
-
+// 引用 body-parser
+const BodyParser = require("body-parser");
+app.use(BodyParser.urlencoded({ extended: true }));
+// 載入 Restaurant  model
+const Restaurant = require("./models/restaurant");
 // 取得資料庫連線狀態
 const db = mongoose.connection;
 db.on("error", () => {
@@ -27,8 +30,14 @@ app.set("view engine", "handlebars");
 // setting static files
 app.use(express.static("public"));
 
+// 設定首頁路由
 app.get("/", (req, res) => {
-  res.render("index", { restaurants: restaurantsList.results });
+  console.log(Restaurant.length);
+
+  Restaurant.find()
+    .lean()
+    .then((restaurants) => res.render("index", { restaurants }))
+    .catch((error) => console.log(error));
 });
 app.get("/search", (req, res) => {
   let noResult = false;
@@ -44,13 +53,44 @@ app.get("/search", (req, res) => {
   res.render("index", { restaurants, keyword, noResult });
 });
 
-app.get("/restaurants/:restaurant_id", (req, res) => {
-  const restaurant = restaurantsList.results.find((restaurant) => {
-    return restaurant.id.toString() === req.params.restaurant_id;
-  });
-
-  res.render("show", { restaurant: restaurant });
+// add new restaurants
+app.get("/restaurants/new", (req, res) => {
+  return res.render("new");
 });
+
+//add new restaurant data submit page
+app.post("/restaurants", (req, res) => {
+  const name = req.body.name;
+  const name_en = req.body.name_en;
+  const category = req.body.category;
+  const image = req.body.image;
+  const location = req.body.location;
+  const phone = req.body.phone;
+  const google_map = req.body.map;
+  const rating = req.body.rating;
+  const description = req.body.description;
+
+  return Restaurant.create({
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+  })
+    .then(() => res.redirect("/"))
+    .catch((error) => console.log(error));
+});
+// app.get("/restaurants/:restaurant_id", (req, res) => {
+//   const restaurant = restaurantsList.results.find((restaurant) => {
+//     return restaurant.id.toString() === req.params.restaurant_id;
+//   });
+
+//   res.render("show", { restaurant: restaurant });
+// });
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`);
 });
