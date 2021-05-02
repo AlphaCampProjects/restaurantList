@@ -14,6 +14,7 @@ const BodyParser = require("body-parser");
 app.use(BodyParser.urlencoded({ extended: true }));
 // 載入 Restaurant  model
 const Restaurant = require("./models/restaurant");
+const restaurant = require("./models/restaurant");
 // 取得資料庫連線狀態
 const db = mongoose.connection;
 db.on("error", () => {
@@ -32,26 +33,24 @@ app.use(express.static("public"));
 
 // 設定首頁路由
 app.get("/", (req, res) => {
-  console.log(Restaurant.length);
-
   Restaurant.find()
     .lean()
     .then((restaurants) => res.render("index", { restaurants }))
     .catch((error) => console.log(error));
 });
-app.get("/search", (req, res) => {
-  let noResult = false;
-  const keyword = req.query.keyword;
-  const restaurants = restaurantsList.results.filter(
-    (restaurant) =>
-      restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
-      restaurant.category.includes(keyword)
-  );
-  if (restaurants.length === 0) {
-    noResult = true;
-  }
-  res.render("index", { restaurants, keyword, noResult });
-});
+// app.get("/search", (req, res) => {
+//   let noResult = false;
+//   const keyword = req.query.keyword;
+//   const restaurants = restaurantsList.results.filter(
+//     (restaurant) =>
+//       restaurant.name.toLowerCase().includes(keyword.toLowerCase()) ||
+//       restaurant.category.includes(keyword)
+//   );
+//   if (restaurants.length === 0) {
+//     noResult = true;
+//   }
+//   res.render("index", { restaurants, keyword, noResult });
+// });
 
 // add new restaurants
 app.get("/restaurants/new", (req, res) => {
@@ -84,13 +83,15 @@ app.post("/restaurants", (req, res) => {
     .then(() => res.redirect("/"))
     .catch((error) => console.log(error));
 });
-// app.get("/restaurants/:restaurant_id", (req, res) => {
-//   const restaurant = restaurantsList.results.find((restaurant) => {
-//     return restaurant.id.toString() === req.params.restaurant_id;
-//   });
 
-//   res.render("show", { restaurant: restaurant });
-// });
+// restaurant detail
+app.get("/restaurants/:id", (req, res) => {
+  const id = req.params.id;
+  return Restaurant.findById(id)
+    .lean()
+    .then((restaurant) => res.render("show", { restaurant }))
+    .catch((error) => console.log(error));
+});
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`);
 });
