@@ -38,7 +38,7 @@
     </div>
     <div class="button-area mb-5 d-flex justify-content-center">
       <a href="/restaurants/{{restaurant._id}}/edit" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Edit</a>
-      <form action="/restaurants/{{restaurant._id}}/delete" method="POST">
+      <form action="/restaurants/{{this._id}}?_method=DELETE"  method="POST">
         <button type="submit" class=" btn btn-secondary btn-sm mx-1">delete</button>
       </form>
     </div>

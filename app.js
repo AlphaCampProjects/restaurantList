@@ -13,6 +13,9 @@ mongoose.connect("mongodb://localhost/restaurant", {
 const BodyParser = require("body-parser");
 app.use(BodyParser.urlencoded({ extended: true }));
 // 載入 Restaurant  model
+
+// 載入 method-override
+const methodOverride = require("method-override");
 const Restaurant = require("./models/restaurant");
 const restaurant = require("./models/restaurant");
 // 取得資料庫連線狀態
@@ -30,7 +33,8 @@ app.set("view engine", "handlebars");
 
 // setting static files
 app.use(express.static("public"));
-
+// 設定每一筆請求都會透過 methodOverride 進行前置處理
+app.use(methodOverride("_method"));
 // 設定首頁路由
 app.get("/", (req, res) => {
   Restaurant.find()
@@ -86,7 +90,7 @@ app.get("/restaurants/:id/edit", (req, res) => {
     .catch((error) => console.log(error));
 });
 
-app.post("/restaurants/:id/edit", (req, res) => {
+app.put("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   const name = req.body.name;
   const name_en = req.body.name_en;
@@ -116,7 +120,7 @@ app.post("/restaurants/:id/edit", (req, res) => {
 });
 
 //delete restaurant
-app.post("/restaurants/:id/delete", (req, res) => {
+app.delete("/restaurants/:id", (req, res) => {
   const id = req.params.id;
   return Restaurant.findById(id)
     .then((restaurant) => restaurant.remove())

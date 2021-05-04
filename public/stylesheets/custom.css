@@ -35,6 +35,21 @@ header {
   color: #9b4b4b;
 }
 
+.add-btn {
+  background-color: #9b4b4b;
+  color: white;
+}
+.add-btn:hover {
+  background-color: #b66868;
+  color: white;
+}
+.form-select {
+  cursor: pointer;
+}
+select:hover {
+  background-color: #fbfbfb;
+}
+
 .form-control::placeholder {
   color: #aaaaaa;
   font-size: 0.8rem;

@@ -17,7 +17,14 @@
 <!-- restaurant list -->
 <div class="container mt-4">
   <div class="add-new d-flex justify-content-end mb-3 mx-5 px-5">
-    <a href="/restaurants/new" class="btn  btn-lg" role="button" aria-pressed="true" style="background-color: #9b4b4b;color:white">新增餐廳</a>
+    <a href="/restaurants/new" class="btn btn-lg add-btn" role="button" aria-pressed="true" ><strong>＋</strong> 新增餐廳</a>
+    <select class="form-select mx-3 " aria-label="Default select example" style="width: fit-content;" >
+      <option selected> 搜尋排列</option>
+      <option value="1"> A -> Z </option>
+      <option value="2"> Z -> A </option>
+      <option value="3">餐廳類別</option>
+      <option value="4">餐廳地區</option>
+    </select>
   </div>
   {{#if restaurants}}
   <div class="row">
@@ -42,7 +49,7 @@
               <div class="card-footer d-flex justify-content-end">
                 <a href="/restaurants/{{this._id}}/edit" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Edit</a>
                 <a href="/restaurants/{{this._id}}" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Detail</a>     
-                <form action="/restaurants/{{this._id}}/delete" method="POST">
+                <form action="/restaurants/{{this._id}}?_method=DELETE" method="POST">
                   <button type="submit" class=" btn btn-secondary btn-sm mx-1">delete</button>
                 </form>
               </div>
