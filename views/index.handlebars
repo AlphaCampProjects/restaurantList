@@ -17,13 +17,16 @@
 <!-- restaurant list -->
 <div class="container mt-4">
   <div class="add-new d-flex justify-content-end mb-3 mx-5 px-5">
-    <a href="/restaurants/new" class="btn btn-lg add-btn" role="button" aria-pressed="true" ><strong>＋</strong> 新增餐廳</a>
-    <select class="form-select mx-3 " aria-label="Default select example" style="width: fit-content;" >
-      <option selected> 搜尋排列</option>
-      <option value="1"> A -> Z </option>
-      <option value="2"> Z -> A </option>
-      <option value="3">餐廳類別</option>
-      <option value="4">餐廳地區</option>
+    
+    <select class="form-select mx-3 " aria-label="Default select example" style="width: fit-content;" onchange="location = this.value;" >
+      
+      <option >{{#if currentSelected}}{{currentSelected}}{{else}}搜尋排列{{/if}}</option>
+      <option value="/sort/name/asc" > 店名 A -> Z </option>
+      <option value="/sort/name/desc" > 店名 Z -> A </option>
+      <option value="/sort/rating/descending"> 評分 高->低 </option>
+      <option value="/sort/rating/ascending" > 評分 低->高</option>
+      <option value="/sort/category/asc">餐廳類別</option>
+      <option value="/sort/location/asc" >餐廳地區</option>
     </select>
   </div>
   {{#if restaurants}}

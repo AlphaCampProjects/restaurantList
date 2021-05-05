@@ -3,21 +3,6 @@ const express = require("express");
 const router = express.Router();
 const Restaurant = require("../../models/restaurant");
 
-router.get("/search", (req, res) => {
-  let noResult = false;
-  const keyword = req.query.keyword;
-  return Restaurant.find({
-    $or: [
-      { name: { $regex: `${keyword}`, $options: "$i" } },
-      { category: { $regex: `${keyword}`, $options: "$i" } },
-    ],
-  })
-    .lean()
-    .then((restaurants) =>
-      res.render("index", { restaurants, keyword, noResult })
-    );
-});
-
 // add new restaurants
 router.get("/new", (req, res) => {
   return res.render("new");
@@ -35,6 +20,7 @@ router.post("/", (req, res) => {
 // restaurant detail
 router.get("/:id", (req, res) => {
   const id = req.params.id;
+  console.log(id);
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render("show", { restaurant }))
@@ -83,6 +69,7 @@ router.put("/:id", (req, res) => {
 //delete restaurant
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
+  console.log(id);
   return Restaurant.findById(id)
     .then((restaurant) => restaurant.remove())
     .then(() => res.redirect("/"))

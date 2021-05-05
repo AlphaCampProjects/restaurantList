@@ -38,6 +38,8 @@ header {
 .add-btn {
   background-color: #9b4b4b;
   color: white;
+  font-size: 18px;
+  width: 140px;
 }
 .add-btn:hover {
   background-color: #b66868;
