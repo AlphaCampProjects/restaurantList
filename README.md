@@ -1,16 +1,16 @@
 # 我的餐廳清單
-一個使用 Node.js + Express 打造的餐廳美食網站，可以查看自己的餐廳清單、依照餐廳名稱與類別進行搜尋，在查詢不到關鍵字餐廳時，頁面會有提示沒有符合的餐廳、同時在每個餐廳列表中，可以進行修改及刪除表上餐廳，也可以任意新增自己喜歡的餐廳名單。
+一個使用 Node.js + Express 打造的餐廳美食網站，可以查看自己的餐廳清單並依照特定方式進行排序、依照餐廳名稱與類別進行搜尋，在查詢不到關鍵字餐廳時，頁面會有提示沒有符合的餐廳、同時在每個餐廳列表中，可以進行修改及刪除表上餐廳，也可以任意新增自己喜歡的餐廳名單。
 
 ##  專案畫面
 
 ### 專案首頁
-<img width="921" alt="restaurant_index" src="https://user-images.githubusercontent.com/69742330/116818548-8b965600-ab9e-11eb-8f43-50cb45509c0a.png">
+<img width="1084" alt="restaurant_index" src="https://user-images.githubusercontent.com/69742330/117138395-912daf00-addd-11eb-8ce3-4d15e0c27f1c.png">
 
 ### 餐廳詳細資訊頁面
-<img width="1041" alt="restaurant_show" src="https://user-images.githubusercontent.com/69742330/116203915-c8adb300-a76e-11eb-9ff8-80712b8a6aa1.png">
+<img width="1139" alt="restaurant_show" src="https://user-images.githubusercontent.com/69742330/117138529-b9b5a900-addd-11eb-9da7-29d86abf4a47.png">
 
 ### 新增餐廳頁面
-<img width="965" alt="add restaurant" src="https://user-images.githubusercontent.com/69742330/116818622-f5aefb00-ab9e-11eb-913b-b110796cec78.png">
+<img width="1058" alt="add restaurant" src="https://user-images.githubusercontent.com/69742330/117138491-aacef680-addd-11eb-80c9-6302b10e7646.png">
 
 
 ## 產品功能
