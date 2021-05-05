@@ -10,7 +10,6 @@ router.get("/new", (req, res) => {
 
 //add new restaurant data submit page
 router.post("/", (req, res) => {
-  console.log(req.body);
   const restaurant = req.body;
   return Restaurant.create(restaurant)
     .then(() => res.redirect("/"))
@@ -20,7 +19,6 @@ router.post("/", (req, res) => {
 // restaurant detail
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  console.log(id);
   return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render("show", { restaurant }))
@@ -69,7 +67,6 @@ router.put("/:id", (req, res) => {
 //delete restaurant
 router.delete("/:id", (req, res) => {
   const id = req.params.id;
-  console.log(id);
   return Restaurant.findById(id)
     .then((restaurant) => restaurant.remove())
     .then(() => res.redirect("/"))

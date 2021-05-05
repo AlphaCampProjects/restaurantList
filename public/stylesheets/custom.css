@@ -116,6 +116,26 @@ select:hover {
 textarea {
   margin: 10px;
 }
+
+.show-page {
+  width: 80%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.new-page,
+.edit-page {
+  width: 70%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+}
+
+.new-page input,
+.new-page textarea,
+.edit-page input,
+.edit-page textarea {
+  width: 95%;
+}
 @media screen and (max-width: 992px) {
   .card img {
     height: 150px;
