@@ -17,17 +17,17 @@
 <!-- restaurant list -->
 <div class="container mt-4">
   <div class="add-new d-flex justify-content-end mb-3 mx-5 px-5">
-    
-    <select class="form-select mx-3 " aria-label="Default select example" style="width: fit-content;" onchange="location = this.value;" >
-      
-      <option >{{#if currentSelected}}{{currentSelected}}{{else}}搜尋排列{{/if}}</option>
-      <option value="/sort/name/asc" > 店名 A -> Z </option>
-      <option value="/sort/name/desc" > 店名 Z -> A </option>
-      <option value="/sort/rating/descending"> 評分 高->低 </option>
-      <option value="/sort/rating/ascending" > 評分 低->高</option>
-      <option value="/sort/category/asc">餐廳類別</option>
-      <option value="/sort/location/asc" >餐廳地區</option>
-    </select>
+    <form action="/sort" method="GET">
+      <select name="sort" class="form-select mx-3 " id='inputType' aria-label="Default select example" style="width: fit-content;" onchange="this.form.submit()" >
+        <option selected>搜尋排列</option>
+        <option value="name-asc" {{#if (eq sort 'name-asc' ) }} selected{{/if}}> 店名 A -> Z </option>
+        <option value="name-desc" {{#if (eq sort 'name-desc')}} selected{{/if}} > 店名 Z -> A </option>
+        <option value="rating-descending" {{#if (eq sort 'rating-descending')}} selected{{/if}}> 評分 高->低 </option>
+        <option value="rating-ascending" {{#if (eq sort 'rating-ascending')}} selected{{/if}}> 評分 低->高</option>
+        <option value="category-asc" {{#if (eq sort 'category-asc')}} selected{{/if}}>餐廳類別</option>
+        <option value="location-asc" {{#if (eq sort 'location-asc')}} selected{{/if}}>餐廳地區</option>
+      </select>
+    </form>
   </div>
   {{#if restaurants}}
   <div class="row">

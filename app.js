@@ -4,6 +4,8 @@ const port = 3000;
 const exphbs = require("express-handlebars");
 const BodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const helpers = require("handlebars-helpers");
+const comparison = helpers.comparison();
 // 引用路由器
 const routes = require("./routes");
 require("./config/mongoose");
