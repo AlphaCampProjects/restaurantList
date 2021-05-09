@@ -38,9 +38,30 @@
     </div>
     <div class="button-area mb-5 d-flex justify-content-center">
       <a href="/restaurants/{{restaurant._id}}/edit" class="btn btn-primary btn-sm mx-1" role="button" aria-pressed="true">Edit</a>
-      <form action="/restaurants/{{restaurant._id}}?_method=DELETE"  method="POST">
-        <button type="submit" class=" btn btn-secondary btn-sm mx-1">delete</button>
-      </form>
+      <button type="button" class="btn btn-secondary btn-sm mx-1" data-bs-toggle="modal" data-bs-target="#alertModal{{restaurant._id}}">delete</button>
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="alertModal{{restaurant._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header ">
+        <h5 class="modal-title " id="exampleModalLabel">刪除此餐廳
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        您確定要刪除此餐廳嗎？    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <form action="/restaurants/{{restaurant._id}}?_method=DELETE" method="POST">
+          <button type="submit" class=" btn btn-danger mx-1">delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
